@@ -1,10 +1,10 @@
 name: build
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   android-example:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -25,13 +25,13 @@ jobs:
           mkdir action-product
           cp bazel-bin/lyra/android_example/lyra_android_example.apk action-product/lyra_example.apk
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: lyra-android-example
           path: action-product
 
   android-arm64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -49,7 +49,7 @@ jobs:
           build-options: --config=android_arm64
 
   linux-amd64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -80,4 +80,21 @@ jobs:
         uses: ./.github/actions/lyra-builder
         with:
           platform: macos
+          architecture: amd64
+
+  windows-amd64:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Setup Lyra dependencies
+        uses: ./.github/actions/setup-lyra-deps
+      - name: Build and upload
+        uses: ./.github/actions/lyra-builder
+        with:
+          platform: windows
           architecture: amd64

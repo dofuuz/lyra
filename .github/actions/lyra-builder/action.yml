@@ -37,7 +37,13 @@ runs:
         cp -r lyra/model_coeffs action-product/
         cp bazel-bin/lyra/cli_example/encoder_main action-product/lyra-encoder
         cp bazel-bin/lyra/cli_example/decoder_main action-product/lyra-decoder
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: lyra-${{ inputs.platform }}-${{ inputs.architecture }}
         path: action-product
+
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: bazel-bin-${{ inputs.platform }}-${{ inputs.architecture }}
+        path: bazel-bin/
