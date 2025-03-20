@@ -5,9 +5,18 @@ description: Setup NDK and python for lyra build
 runs:
   using: composite
   steps:
-    - shell: bash
+    - if: runner.os != 'Windows'
+      shell: bash
       run: |
-        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "platforms;android-30"
-        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;21.4.7075529"
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-30"
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.4.7075529"
+        python -m pip install --upgrade pip
+        pip install numpy
+
+    - if: runner.os == 'Windows'
+      shell: bash
+      run: |
+        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --install "platforms;android-30"
+        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --install "ndk;21.4.7075529"
         python -m pip install --upgrade pip
         pip install numpy
