@@ -61,4 +61,8 @@ android_binary(
     manifest = "AndroidManifest.xml",
     multidex = "native",
     deps = [":lyra_android_lib"],
+    linkopts = [
+        "-Wl,--exclude-libs,libgcc.a",
+        "-Wl,--exclude-libs,libunwind.a",
+    ],
 )
