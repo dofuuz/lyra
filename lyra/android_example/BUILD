@@ -17,6 +17,8 @@ cc_library(
         "-landroid",
         "-ldl",
         "-llog",
+        "-Wl,--exclude-libs,libgcc.a",
+        "-Wl,--exclude-libs,libunwind.a",
     ],
     deps = [
         "//lyra:lyra_benchmark_lib",
