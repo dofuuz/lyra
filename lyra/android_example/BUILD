@@ -29,7 +29,6 @@ cc_library(
     name = "jni_lyra_benchmark_lib",
     srcs = [
         "jni_lyra_benchmark_lib.cc",
-        "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
     linkopts = [
         "-landroid",
@@ -45,6 +44,7 @@ cc_library(
         "//lyra/cli_example:decoder_main_lib",
         "//lyra/cli_example:encoder_main_lib",
         "@com_google_absl//absl/random",
+        "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
     # alwayslink = True,
 )
