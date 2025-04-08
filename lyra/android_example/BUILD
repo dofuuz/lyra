@@ -15,13 +15,19 @@ android_library(
     manifest = "LibraryManifest.xml",
     resource_files = glob(["res/**/*"]),
     deps = [
-        ":jni_lyra_benchmark_lib",
+        ":jni_lyra_benchmark_lib_shared",
         "@maven//:androidx_annotation_annotation",
         "@maven//:androidx_appcompat_appcompat",
         "@maven//:androidx_constraintlayout_constraintlayout",
         "@maven//:androidx_core_core",
         "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
+)
+
+cc_shared_library(
+    name = "jni_lyra_benchmark_lib_shared",
+    shared_lib_name = "jni_lyra_benchmark_lib.so",
+    deps = [":jni_lyra_benchmark_lib"],
 )
 
 # Android App rules
@@ -46,7 +52,7 @@ cc_library(
         "//lyra/cli_example:encoder_main_lib",
         "@com_google_absl//absl/random",
     ],
-    alwayslink = True,
+    # alwayslink = True,
 )
 
 filegroup(
