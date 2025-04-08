@@ -10,7 +10,7 @@ licenses(["notice"])
 
 android_library(
     name = "lyra_android_lib",
-    srcs = ["//lyra/android_example/java/com/example/android/lyra:MainActivity.java"],
+    srcs = ["java/com/example/android/lyra/MainActivity.java"],
     custom_package = "com.example.android.lyra",
     manifest = "LibraryManifest.xml",
     resource_files = glob(["res/**/*"]),
@@ -31,9 +31,7 @@ cc_library(
         "jni_lyra_benchmark_lib.cc",
         "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
-    copts = ["-fPIC"],
     linkopts = [
-        "-shared",
         "-landroid",
         "-ldl",
         "-llog",
@@ -62,7 +60,6 @@ android_binary(
         ":assets",
     ],
     assets_dir = "model_coeffs",
-    custom_package = "com.example.android.lyra",
     manifest = "AndroidManifest.xml",
     multidex = "native",
     deps = [":lyra_android_lib"],
