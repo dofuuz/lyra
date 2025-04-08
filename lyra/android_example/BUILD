@@ -6,29 +6,7 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])
 
-# Android App rules
-cc_library(
-    name = "jni_lyra_benchmark_lib",
-    srcs = [
-        "jni_lyra_benchmark_lib.cc",
-        "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
-    ],
-    linkopts = [
-        "-landroid",
-        "-llog",
-        "-Wl,--exclude-libs,libgcc.a",
-        "-Wl,--exclude-libs,libgcc_real.a",
-        "-Wl,--exclude-libs,libunwind.a",
-    ],
-    deps = [
-        "//lyra:lyra_benchmark_lib",
-        "//lyra:lyra_config",
-        "//lyra/cli_example:decoder_main_lib",
-        "//lyra/cli_example:encoder_main_lib",
-        "@com_google_absl//absl/random",
-    ],
-    alwayslink = True,
-)
+
 
 android_library(
     name = "lyra_android_lib",
@@ -44,6 +22,31 @@ android_library(
         "@maven//:androidx_core_core",
         "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
+)
+
+# Android App rules
+cc_library(
+    name = "jni_lyra_benchmark_lib",
+    srcs = [
+        "jni_lyra_benchmark_lib.cc",
+        "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
+    ],
+    linkopts = [
+        "-landroid",
+        "-ldl",
+        "-llog",
+        "-Wl,--exclude-libs,libgcc.a",
+        "-Wl,--exclude-libs,libgcc_real.a",
+        "-Wl,--exclude-libs,libunwind.a",
+    ],
+    deps = [
+        "//lyra:lyra_benchmark_lib",
+        "//lyra:lyra_config",
+        "//lyra/cli_example:decoder_main_lib",
+        "//lyra/cli_example:encoder_main_lib",
+        "@com_google_absl//absl/random",
+    ],
+    # alwayslink = True,
 )
 
 filegroup(
