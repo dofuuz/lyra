@@ -31,6 +31,9 @@ build:android_arm64 --linkopt=-lm
 build:android_arm64 --linkopt=-ldl
 build:android_arm64 --linkopt=-llog
 build:android_arm64 --linkopt=-landroid
+build:android_arm64 --linkopt=-Wl,--exclude-libs,libgcc.a
+build:android_arm64 --linkopt=-Wl,--exclude-libs,libgcc_real.a
+build:android_arm64 --linkopt=-Wl,--exclude-libs,libunwind.a
 build:android_arm64 --cxxopt=-std=gnu++17
 # This is required for using command line flags on android.
 # It could be removed for the APK targets, but making it default since
