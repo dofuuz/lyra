@@ -27,7 +27,7 @@ cc_library(
         "//lyra/cli_example:encoder_main_lib",
         "@com_google_absl//absl/random",
     ],
-    # alwayslink = True,
+    alwayslink = True,
 )
 
 android_library(
