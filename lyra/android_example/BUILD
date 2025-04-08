@@ -13,14 +13,11 @@ cc_library(
         "jni_lyra_benchmark_lib.cc",
         "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
-    copts = [
-        "-fvisibility=hidden",
-    ],
     linkopts = [
         "-landroid",
-        "-ldl",
         "-llog",
         "-Wl,--exclude-libs,libgcc.a",
+        "-Wl,--exclude-libs,libgcc_real.a",
         "-Wl,--exclude-libs,libunwind.a",
     ],
     deps = [
@@ -30,7 +27,7 @@ cc_library(
         "//lyra/cli_example:encoder_main_lib",
         "@com_google_absl//absl/random",
     ],
-    alwayslink = True,
+    # alwayslink = True,
 )
 
 android_library(
