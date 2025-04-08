@@ -25,13 +25,15 @@ android_library(
 )
 
 # Android App rules
-cc_shared_library(
+cc_library(
     name = "jni_lyra_benchmark_lib",
     srcs = [
         "jni_lyra_benchmark_lib.cc",
         "@org_tensorflow//tensorflow/lite:libtensorflowlite.so",
     ],
+    copts = ["-fPIC"],
     linkopts = [
+        "-shared",
         "-landroid",
         "-ldl",
         "-llog",
