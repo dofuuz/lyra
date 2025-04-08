@@ -56,6 +56,7 @@ filegroup(
 
 android_binary(
     name = "lyra_android_example",
+    custom_package = "com.example.android.lyra",
     assets = [
         ":assets",
     ],
