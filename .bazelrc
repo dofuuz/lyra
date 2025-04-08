@@ -13,7 +13,6 @@
 # of installing a specific clang toolchain is a bit involved, the documentation
 # for clang toolchain setup is in toolchain/
 
-build --copt=-Wno-deprecated-builtins
 build --copt=-Wno-deprecated-declarations
 build --cxxopt=-std=gnu++17
 build --linkopt=-lm

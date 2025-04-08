@@ -15,7 +15,7 @@ android_library(
     manifest = "LibraryManifest.xml",
     resource_files = glob(["res/**/*"]),
     deps = [
-        ":jni_lyra_benchmark_lib_shared",
+        ":jni_lyra_benchmark_lib",
         "@maven//:androidx_annotation_annotation",
         "@maven//:androidx_appcompat_appcompat",
         "@maven//:androidx_constraintlayout_constraintlayout",
@@ -24,14 +24,8 @@ android_library(
     ],
 )
 
-cc_shared_library(
-    name = "jni_lyra_benchmark_lib_shared",
-    shared_lib_name = "jni_lyra_benchmark_lib.so",
-    deps = [":jni_lyra_benchmark_lib"],
-)
-
 # Android App rules
-cc_library(
+cc_shared_library(
     name = "jni_lyra_benchmark_lib",
     srcs = [
         "jni_lyra_benchmark_lib.cc",
